@@ -1,0 +1,31 @@
+classification: synthetic-reference
+
+image:
+  repository: ghcr.io/aah20/kubernetes-ai-sre-platform
+  tag: "0.1.0"
+
+serviceAccount:
+  create: true
+  annotations: {}
+
+agent:
+  liveActionsEnabled: false
+  requireHumanApproval: true
+  failClosed: true
+  allowedActions:
+    - logs.query
+    - kubernetes.events.read
+    - deployment.diff.read
+    - incident.summary.draft
+
+evidence:
+  rawPromptStorage: false
+  secretRedaction: true
+  defaultClassification: synthetic_controlled_test
+
+migration:
+  dualWrite: true
+  minimumIngestionParity: 0.999
+  requireFieldPreservation: true
+  requireMaterialDetectionParity: true
+  requireEvidenceContinuity: true

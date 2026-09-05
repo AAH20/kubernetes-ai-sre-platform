@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kubernetes-ai-sre-platform"
+version = "0.1.0"
+description = "Open-source Kubernetes AI SRE platform for AWS EKS incident response, continuous compliance, OpenTelemetry, VictoriaLogs migration, security KPIs, and cloud unit economics."
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "Apache-2.0"}
+authors = [{name = "Ahmed Hassan"}]
+keywords = [
+  "Kubernetes AI", "AI SRE", "Kubernetes monitoring", "AWS EKS",
+  "incident response automation", "continuous compliance", "VictoriaLogs",
+  "Elasticsearch migration", "OpenTelemetry", "observability cost optimization"
+]
+
+[project.scripts]
+kube-ai-sre = "kube_ai_sre.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["kube_ai_sre*"]

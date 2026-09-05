@@ -1,0 +1,25 @@
+receivers:
+  otlp:
+    protocols:
+      grpc: {}
+      http: {}
+
+processors:
+  memory_limiter:
+    check_interval: 1s
+    limit_mib: 512
+  batch: {}
+
+exporters:
+  # Synthetic reference endpoints. Use authenticated TLS endpoints in production.
+  elasticsearch/source:
+    endpoints: [http://elasticsearch.example.invalid:9200]
+  otlphttp/victorialogs:
+    logs_endpoint: http://victorialogs.example.invalid:9428/insert/opentelemetry/v1/logs
+
+service:
+  pipelines:
+    logs:
+      receivers: [otlp]
+      processors: [memory_limiter, batch]
+      exporters: [elasticsearch/source, otlphttp/victorialogs]
